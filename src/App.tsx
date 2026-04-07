@@ -291,30 +291,6 @@ const GALLERY_ITEMS = [
     tag:  { fr: 'Featured', ar: 'مميز' },
     featured: false,
   },
-  {
-    type: 'image',
-    src: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200&auto=format&fit=crop',
-    label: { fr: 'Equipements Premium', ar: 'معدات ممتازة' },
-    sub:  { fr: 'Performance et sécurité', ar: 'الأداء والمارة' },
-    tag:  { fr: 'Cardio', ar: 'كارديو' },
-    featured: false,
-  },
-  {
-    type: 'image',
-    src: 'https://images.unsplash.com/photo-1571731956672-f2b94d7dd0cb?q=80&w=1200&auto=format&fit=crop',
-    label: { fr: 'Zone Poids Libres', ar: 'منطقة الأوزان الحرة' },
-    sub:  { fr: 'Espace optimisé', ar: 'مساحة محسنة' },
-    tag:  { fr: 'Force', ar: 'القوة' },
-    featured: false,
-  },
-  {
-    type: 'image',
-    src: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=1200&auto=format&fit=crop',
-    label: { fr: 'Espace Entraînement', ar: 'مساحة التدريب' },
-    sub:  { fr: 'Design moderne', ar: 'تصميم عصري' },
-    tag:  { fr: 'Gym', ar: 'القاعة' },
-    featured: false,
-  },
 ];
 
 const TESTIMONIALS = [
@@ -326,7 +302,7 @@ const TESTIMONIALS = [
       fr: "Salle de sport bien située avec une variété d'équipements pour le cardio ou la musculation. Le stationnement est facile et la salle avec ses 2 niveaux, permet aux adhérents d'avoir suffisamment d'espace pour travailler à l'aise.", 
       ar: "قاعة رياضة بموقع ممتاز مع مجموعة متنوعة من المعدات للكارديو أو كمال الأجسام. ركن السيارات سهل والقاعة بمستوييها تتيح للمشتركين مساحة كافية للعمل براحة." 
     }, 
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop&face' 
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200&auto=format&fit=crop' 
   },
   { 
     name: 'Zahouani Mouldi', 
@@ -336,7 +312,7 @@ const TESTIMONIALS = [
       fr: "Je m’entraîne dans cette salle depuis un moment, et franchement c’est l’un des meilleurs choix que j’ai faits. L’ambiance est motivante, les équipements sont propres et bien entretenus, et les coachs sont toujours disponibles pour guider et corriger. Avec le temps, cette salle est vraiment devenue comme une deuxième famille pour moi.", 
       ar: "أتدرب في هذه القاعة منذ فترة، وبصراحة هذا أحد أفضل القرارات التي اتخذتها. الأجواء محفزة، المعدات نظيفة وصيانتها جيدة، والمدربون متاحون دائماً للتوجيه والتصحيح. مع الوقت، أصبحت هذه القاعة حقاً كعائلة ثانية بالنسبة لي." 
     }, 
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=100&auto=format&fit=crop&face' 
+    avatar: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=200&auto=format&fit=crop' 
   },
   { 
     name: 'Naima Khodja', 
@@ -346,7 +322,7 @@ const TESTIMONIALS = [
       fr: "Accueil chaleureux ❤️ propre et professionnel", 
       ar: "استقبال حار ❤️ نظافة واحترافية" 
     }, 
-    avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=100&auto=format&fit=crop&face' 
+    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop' 
   },
 ];
 
@@ -440,7 +416,6 @@ function MediaCard({
           src={src}
           loop
           playsInline
-          muted
           preload="metadata"
           onLoadedMetadata={() => setLoaded(true)}
           className={`absolute inset-0 w-full h-full object-cover transition-all duration-700
@@ -931,11 +906,11 @@ export default function App() {
                           {plan.duration[lang]}
                         </div>
 
-                        <div className="mb-8">
-                          <div className={`font-display text-4xl whitespace-nowrap ${plan.highlight ? 'text-red-400' : 'text-white'}`}>
+                        <div className="mb-8 flex items-baseline gap-2">
+                          <span className={`font-display text-4xl whitespace-nowrap ${plan.highlight ? 'text-red-400' : 'text-white'}`}>
                             {plan.price}
-                          </div>
-                          <div className="text-white/40 text-[10px] font-black uppercase tracking-widest mt-2">{plan.priceNote[lang]}</div>
+                          </span>
+                          <span className="text-white/40 text-[10px] font-black uppercase tracking-widest">{plan.priceNote[lang]}</span>
                         </div>
 
                         <div className="text-[10px] font-black tracking-widest uppercase text-white/30 mb-5">
@@ -1048,7 +1023,7 @@ export default function App() {
                     </div>
 
                     {/* ── GRILLE MÉDIAS (Reste de la galerie) ── */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       {GALLERY_ITEMS.slice(1).map((item, i) => (
                         <MediaCard
                           key={item.src}
