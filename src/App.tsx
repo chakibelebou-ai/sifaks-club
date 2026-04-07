@@ -266,8 +266,9 @@ const TRAINERS = [
 
 // ── Galerie : uniquement les 3 vraies vidéos du club ──
 // Les fichiers sont servis depuis public/videos/ par Express/Vite
-const GALLERY_VIDEOS = [
+const GALLERY_ITEMS = [
   {
+    type: 'video',
     src: '/videos/video3.mp4',
     label: { fr: 'Musculation & Force', ar: 'كمال الأجسام والقوة' },
     sub:  { fr: 'Progression garantie, équipements premium', ar: 'تقدم مضمون ومعدات ممتازة' },
@@ -275,6 +276,7 @@ const GALLERY_VIDEOS = [
     featured: true,
   },
   {
+    type: 'video',
     src: '/videos/video2.mp4',
     label: { fr: 'CrossFit Intensité', ar: 'كثافة كروس فيت' },
     sub:  { fr: 'Entraînement fonctionnel haute intensité', ar: 'تدريب وظيفي عالي الكثافة' },
@@ -282,18 +284,70 @@ const GALLERY_VIDEOS = [
     featured: false,
   },
   {
+    type: 'video',
     src: '/videos/video1.mp4',
     label: { fr: 'L\'Esprit du Combat', ar: 'روح القتال' },
     sub:  { fr: 'Arts Martiaux & Jujitsu', ar: 'فنون قتالية وجوجيتسو' },
     tag:  { fr: 'Featured', ar: 'مميز' },
     featured: false,
   },
+  {
+    type: 'image',
+    src: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200&auto=format&fit=crop',
+    label: { fr: 'Equipements Premium', ar: 'معدات ممتازة' },
+    sub:  { fr: 'Performance et sécurité', ar: 'الأداء والمارة' },
+    tag:  { fr: 'Cardio', ar: 'كارديو' },
+    featured: false,
+  },
+  {
+    type: 'image',
+    src: 'https://images.unsplash.com/photo-1571731956672-f2b94d7dd0cb?q=80&w=1200&auto=format&fit=crop',
+    label: { fr: 'Zone Poids Libres', ar: 'منطقة الأوزان الحرة' },
+    sub:  { fr: 'Espace optimisé', ar: 'مساحة محسنة' },
+    tag:  { fr: 'Force', ar: 'القوة' },
+    featured: false,
+  },
+  {
+    type: 'image',
+    src: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=1200&auto=format&fit=crop',
+    label: { fr: 'Espace Entraînement', ar: 'مساحة التدريب' },
+    sub:  { fr: 'Design moderne', ar: 'تصميم عصري' },
+    tag:  { fr: 'Gym', ar: 'القاعة' },
+    featured: false,
+  },
 ];
 
 const TESTIMONIALS = [
-  { name: 'Ahmed B.', result: '-18kg', months: 4, text: { fr: "En 4 mois j'ai perdu 18kg et gagné une confiance en moi que je n'avais jamais eue. Les coachs sont exceptionnels.", ar: "في 4 أشهر خسرت 18 كغ واكتسبت ثقة بالنفس لم أكن أمتلكها قط. المدربون استثنائيون." }, avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop&face' },
-  { name: 'Yasmine K.', result: '+12kg muscle', months: 6, text: { fr: "Club Sifaks m'a transformée. Jujutsu + musculation, c'est la combinaison parfaite. Je me sens invincible.", ar: "نادي سيفاكس غيّرني. الجوجيتسو + كمال الأجسام، هذا هو المزيج المثالي. أشعر أنني لا يُقهر." }, avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=100&auto=format&fit=crop&face' },
-  { name: 'Mehdi R.', result: 'Ceinture noire', months: 24, text: { fr: "J'ai obtenu ma ceinture noire de Kung Fu ici. La pédagogie du Coach Sifaks est unique en Algérie.", ar: "حصلت على الحزام الأسود في الكونغ فو هنا. أسلوب الكوتش سيفاكس فريد من نوعه في الجزائر." }, avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=100&auto=format&fit=crop&face' },
+  { 
+    name: 'Kamel Mahfoudi', 
+    result: 'Expertise', 
+    months: 12, 
+    text: { 
+      fr: "Salle de sport bien située avec une variété d'équipements pour le cardio ou la musculation. Le stationnement est facile et la salle avec ses 2 niveaux, permet aux adhérents d'avoir suffisamment d'espace pour travailler à l'aise.", 
+      ar: "قاعة رياضة بموقع ممتاز مع مجموعة متنوعة من المعدات للكارديو أو كمال الأجسام. ركن السيارات سهل والقاعة بمستوييها تتيح للمشتركين مساحة كافية للعمل براحة." 
+    }, 
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop&face' 
+  },
+  { 
+    name: 'Zahouani Mouldi', 
+    result: 'Famille', 
+    months: 24, 
+    text: { 
+      fr: "Je m’entraîne dans cette salle depuis un moment, et franchement c’est l’un des meilleurs choix que j’ai faits. L’ambiance est motivante, les équipements sont propres et bien entretenus, et les coachs sont toujours disponibles pour guider et corriger. Avec le temps, cette salle est vraiment devenue comme une deuxième famille pour moi.", 
+      ar: "أتدرب في هذه القاعة منذ فترة، وبصراحة هذا أحد أفضل القرارات التي اتخذتها. الأجواء محفزة، المعدات نظيفة وصيانتها جيدة، والمدربون متاحون دائماً للتوجيه والتصحيح. مع الوقت، أصبحت هذه القاعة حقاً كعائلة ثانية بالنسبة لي." 
+    }, 
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=100&auto=format&fit=crop&face' 
+  },
+  { 
+    name: 'Naima Khodja', 
+    result: 'Propreté', 
+    months: 6, 
+    text: { 
+      fr: "Accueil chaleureux ❤️ propre et professionnel", 
+      ar: "استقبال حار ❤️ نظافة واحترافية" 
+    }, 
+    avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=100&auto=format&fit=crop&face' 
+  },
 ];
 
 // ── Composant texte effet machine à écrire ──
@@ -328,24 +382,30 @@ interface VideoCardProps {
   index?: number;
 }
 
-function VideoCard({
-  src, label, sub, tag, lang, featured = false, index = 0
-}: VideoCardProps) {
+function MediaCard({
+  type, src, label, sub, tag, lang, featured = false, index = 0
+}: VideoCardProps & { type: 'video' | 'image' }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
   const handleMouseEnter = () => {
-    videoRef.current?.play().then(() => setPlaying(true)).catch(() => {});
+    if (type === 'video') {
+      videoRef.current?.play().then(() => setPlaying(true)).catch(() => {});
+    } else {
+      setPlaying(true);
+    }
   };
   const handleMouseLeave = () => {
-    if (videoRef.current) {
+    if (type === 'video' && videoRef.current) {
       videoRef.current.pause();
+      setPlaying(false);
+    } else {
       setPlaying(false);
     }
   };
-  // Sur mobile : tap pour toggle play/pause
   const handleTap = () => {
+    if (type === 'image') return;
     if (!videoRef.current) return;
     if (playing) {
       videoRef.current.pause(); setPlaying(false);
@@ -357,7 +417,8 @@ function VideoCard({
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
       transition={{ delay: index * 0.12, duration: 0.6, ease: 'easeOut' }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -365,69 +426,73 @@ function VideoCard({
       className={`relative overflow-hidden border border-white/8 group cursor-pointer bg-[#080808]
         aspect-video
       `}
-      style={{ boxShadow: playing ? '0 0 0 1px rgba(220,38,38,0.4)' : undefined }}
+      style={{ boxShadow: (playing && type === 'video') ? '0 0 0 1px rgba(220,38,38,0.4)' : undefined }}
     >
-      {/* Skeleton shimmer pendant le chargement */}
       {!loaded && (
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-3">
           <div className="w-8 h-8 border-2 border-red-600 border-t-transparent rounded-full animate-spin" />
         </div>
       )}
 
-      {/* Vidéo */}
-      <video
-        ref={videoRef}
-        src={src}
-        loop
-        playsInline
-        preload="metadata"
-        onLoadedMetadata={() => setLoaded(true)}
-        className={`absolute inset-0 w-full h-full object-cover transition-all duration-700
-          ${playing ? 'scale-100' : 'scale-102'}
-          ${loaded ? 'opacity-100' : 'opacity-0'}
-        `}
-      />
+      {type === 'video' ? (
+        <video
+          ref={videoRef}
+          src={src}
+          loop
+          playsInline
+          muted
+          preload="metadata"
+          onLoadedMetadata={() => setLoaded(true)}
+          className={`absolute inset-0 w-full h-full object-cover transition-all duration-700
+            ${playing ? 'scale-100' : 'scale-102'}
+            ${loaded ? 'opacity-100' : 'opacity-0'}
+          `}
+        />
+      ) : (
+        <img
+          src={src}
+          alt={label[lang]}
+          onLoad={() => setLoaded(true)}
+          className={`absolute inset-0 w-full h-full object-cover transition-all duration-700
+            ${playing ? 'scale-110' : 'scale-100'}
+            ${loaded ? 'opacity-100' : 'opacity-0'}
+          `}
+        />
+      )}
 
-      {/* Gradient permanent en bas */}
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent pointer-events-none" />
-
-      {/* Overlay sombre quand pas en lecture */}
       <div className={`absolute inset-0 bg-black/40 pointer-events-none transition-opacity duration-500 ${playing ? 'opacity-0' : 'opacity-100'}`} />
 
-      {/* Tag discipline — coin haut gauche */}
       <div className={`absolute top-4 left-4 z-10 transition-all duration-300 ${playing ? 'opacity-0 -translate-y-1' : 'opacity-100'}`}>
         <span className="bg-red-600 text-white text-[9px] font-black uppercase tracking-widest px-2.5 py-1">
           {tag[lang]}
         </span>
       </div>
 
-      {/* Numéro — coin haut droit */}
       <div className="absolute top-4 right-4 z-10">
         <span className="font-display text-white/10 text-3xl">0{index + 1}</span>
       </div>
 
-      {/* Icône play quand vidéo pausée */}
-      <div className={`absolute inset-0 z-10 flex items-center justify-center transition-all duration-300 pointer-events-none
-        ${playing ? 'opacity-0 scale-75' : 'opacity-100 scale-100'}`}>
-        <div className="w-14 h-14 rounded-full border-2 border-white/20 bg-black/30 backdrop-blur-sm flex items-center justify-center">
-          <div className="w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-l-[16px] border-l-white ml-1" />
+      {type === 'video' && (
+        <div className={`absolute inset-0 z-10 flex items-center justify-center transition-all duration-300 pointer-events-none
+          ${playing ? 'opacity-0 scale-75' : 'opacity-100 scale-100'}`}>
+          <div className="w-14 h-14 rounded-full border-2 border-white/20 bg-black/30 backdrop-blur-sm flex items-center justify-center">
+            <div className="w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-l-[16px] border-l-white ml-1" />
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Trait rouge gauche animé à la lecture */}
-      <div className={`absolute left-0 top-0 bottom-0 w-0.5 bg-red-600 origin-top transition-transform duration-500 ${playing ? 'scale-y-100' : 'scale-y-0'}`} />
+      <div className={`absolute left-0 top-0 bottom-0 w-0.5 bg-red-600 origin-top transition-transform duration-500 ${(playing && type === 'video') ? 'scale-y-100' : 'scale-y-0'}`} />
 
-      {/* Métadonnées — bas de carte */}
       <div className="absolute inset-x-0 bottom-0 z-10 p-5 translate-y-2 group-hover:translate-y-0 transition-transform duration-400">
         <div className="text-white/50 text-[10px] font-bold uppercase tracking-widest mb-1.5">{sub[lang]}</div>
         <h3 className={`font-display uppercase leading-none text-white ${featured ? 'text-3xl md:text-4xl' : 'text-xl md:text-2xl'}`}>
           {label[lang]}
         </h3>
-        {/* Hint lecture */}
         <div className={`flex items-center gap-2 mt-3 transition-all duration-300 ${playing ? 'opacity-100' : 'opacity-0 translate-y-1 group-hover:opacity-60 group-hover:translate-y-0'}`}>
           <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
           <span className="text-white/40 text-[9px] font-black uppercase tracking-widest">
-            {lang === 'fr' ? 'En lecture' : 'قيد التشغيل'}
+            {type === 'video' ? (lang === 'fr' ? 'En lecture' : 'قيد التشغيل') : (lang === 'fr' ? 'Voir' : 'عرض')}
           </span>
         </div>
       </div>
@@ -867,10 +932,10 @@ export default function App() {
                         </div>
 
                         <div className="mb-8">
-                          <div className={`font-display text-5xl ${plan.highlight ? 'text-red-400' : 'text-white'}`}>
-                            {plan.price.split(' ')[0]}
+                          <div className={`font-display text-4xl whitespace-nowrap ${plan.highlight ? 'text-red-400' : 'text-white'}`}>
+                            {plan.price}
                           </div>
-                          <div className="text-white/40 text-sm mt-1">{plan.price.split(' ')[1]} {plan.priceNote[lang]}</div>
+                          <div className="text-white/40 text-[10px] font-black uppercase tracking-widest mt-2">{plan.priceNote[lang]}</div>
                         </div>
 
                         <div className="text-[10px] font-black tracking-widest uppercase text-white/30 mb-5">
@@ -951,24 +1016,25 @@ export default function App() {
                         </span>
                       </div>
                       <span className="text-white/15 text-[10px] font-black uppercase tracking-widest">
-                        {lang === 'fr' ? '3 vidéos' : '3 مقاطع'}
+                        {lang === 'fr' ? `${GALLERY_ITEMS.length} éléments` : `${GALLERY_ITEMS.length} عناصر`}
                       </span>
                     </div>
 
                     {/* ── VIDÉO FEATURED (video3 — Musculation) ── */}
                     <div className="max-w-4xl mx-auto w-full">
-                      <VideoCard
-                        src={GALLERY_VIDEOS[0].src}
-                        label={GALLERY_VIDEOS[0].label}
-                        sub={GALLERY_VIDEOS[0].sub}
-                        tag={GALLERY_VIDEOS[0].tag}
+                      <MediaCard
+                        type={GALLERY_ITEMS[0].type as any}
+                        src={GALLERY_ITEMS[0].src}
+                        label={GALLERY_ITEMS[0].label}
+                        sub={GALLERY_ITEMS[0].sub}
+                        tag={GALLERY_ITEMS[0].tag}
                         lang={lang}
                         featured={true}
                         index={0}
                       />
                       <div className={`mt-3 flex items-center justify-center gap-2 text-white/20 text-[10px] font-bold uppercase tracking-widest ${isRtl ? 'flex-row-reverse' : ''}`}>
                         <span className="w-4 h-px bg-red-600 inline-block" />
-                        {lang === 'fr' ? 'Survoler pour lire · Cliquer sur mobile' : 'مرر لتشغيل · انقر على الجوال'}
+                        {lang === 'fr' ? 'Survoler pour interagir · Cliquer sur mobile' : 'مرر للتفاعل · انقر على الجوال'}
                       </div>
                     </div>
 
@@ -976,20 +1042,21 @@ export default function App() {
                     <div className="flex items-center gap-3 py-2">
                       <div className="h-px flex-1 bg-white/5" />
                       <span className="text-white/10 text-[10px] font-black uppercase tracking-[0.4em]">
-                        {lang === 'fr' ? 'Autres séances' : 'حصص أخرى'}
+                        {lang === 'fr' ? 'Médias & Séances' : 'وسائط وحصص'}
                       </span>
                       <div className="h-px flex-1 bg-white/5" />
                     </div>
 
-                    {/* ── GRILLE 2 VIDÉOS (video2 + video3) ── */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      {GALLERY_VIDEOS.slice(1).map((vid, i) => (
-                        <VideoCard
-                          key={vid.src}
-                          src={vid.src}
-                          label={vid.label}
-                          sub={vid.sub}
-                          tag={vid.tag}
+                    {/* ── GRILLE MÉDIAS (Reste de la galerie) ── */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                      {GALLERY_ITEMS.slice(1).map((item, i) => (
+                        <MediaCard
+                          key={item.src}
+                          type={item.type as any}
+                          src={item.src}
+                          label={item.label}
+                          sub={item.sub}
+                          tag={item.tag}
                           lang={lang}
                           featured={false}
                           index={i + 1}
