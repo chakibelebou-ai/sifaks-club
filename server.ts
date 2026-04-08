@@ -3,6 +3,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { createServer as createViteServer } from "vite";
 import helmet from "helmet";
+import hpp from "hpp";
+import cors from "cors";
 import { rateLimit } from "express-rate-limit";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -26,22 +28,57 @@ async function startServer() {
     message: "Trop de requêtes depuis cette IP, veuillez réessayer plus tard.",
   });
   app.use(limiter);
+  
+  // 1.5. Protection contre la pollution des paramètres HTTP
+  app.use(hpp());
+
+  // 1.6. Configuration CORS stricte (partage de ressources entre origines)
+  app.use(cors({
+    origin: process.env.NODE_ENV === "production" ? ["https://votre-domaine-club.algerie"] : true,
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  }));
 
   // 2. Sécurisation des en-têtes HTTP avec Helmet
   app.use(
     helmet({
       contentSecurityPolicy: {
+        useDefaults: true,
         directives: {
-          ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-          "script-src": ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://www.instagram.com", "https://platform.instagram.com"],
+          "default-src": ["'self'"],
+          "script-src": [
+            "'self'",
+            "'unsafe-inline'",
+            "'unsafe-eval'", // Gardé pour la compatibilité Vite/React dev, peut être retiré en production pure
+            "https://www.instagram.com",
+            "https://platform.instagram.com"
+          ],
           "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-          "img-src": ["'self'", "data:", "https://*.cdninstagram.com", "https://*.fbcdn.net", "https://images.unsplash.com", "https://grainy-gradients.vercel.app", "https://picsum.photos"],
+          "img-src": [
+            "'self'",
+            "data:",
+            "https://*.cdninstagram.com",
+            "https://*.fbcdn.net",
+            "https://images.unsplash.com",
+            "https://grainy-gradients.vercel.app",
+            "https://picsum.photos"
+          ],
           "font-src": ["'self'", "https://fonts.gstatic.com"],
           "frame-src": ["'self'", "https://www.instagram.com"],
           "connect-src": ["'self'", "https://www.instagram.com"],
+          "object-src": ["'none'"],
+          "upgrade-insecure-requests": [],
         },
       },
-      crossOriginEmbedderPolicy: false, // Nécessaire pour certains scripts tiers
+      crossOriginEmbedderPolicy: false,
+      strictTransportSecurity: {
+        maxAge: 31536000,
+        includeSubDomains: true,
+        preload: true,
+      },
+      xContentOpenerPolicy: { policy: "same-origin" },
+      referrerPolicy: { policy: "strict-origin-when-cross-origin" },
     })
   );
 

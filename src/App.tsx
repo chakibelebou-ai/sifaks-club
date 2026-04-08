@@ -31,6 +31,8 @@ import {
   Target,
   Award,
   Menu,
+  Volume2,
+  VolumeX,
 } from 'lucide-react';
 
 type Language = 'fr' | 'ar';
@@ -57,7 +59,7 @@ const TRANSLATIONS = {
       heroSubtitle: "Rejoignez l'élite. Coaching personnalisé, arts martiaux et musculation de haut niveau — fondé par le Coach Sifaks.",
       cta: "Commencer maintenant",
       ctaSecondary: "Voir les tarifs",
-      stats: { members: "1500+\nMembres", coaches: "12\nExperts", space: "800m²\nd'Espace", years: "10+\nAns d'Exp." }
+      stats: { members: "1500+\nMembres", coaches: "Expert\nCoaching", space: "800m²\nd'Espace", years: "35+\nAns d'Exp." }
     },
     disciplines: {
       title: "Nos Disciplines",
@@ -105,7 +107,7 @@ const TRANSLATIONS = {
     faq: {
       title: "Questions Fréquentes",
       items: [
-        { q: "Quels sont vos horaires d'ouverture ?", a: "Nous sommes ouverts du samedi au jeudi, de 06h00 à 22h00. Le vendredi de 08h00 à 12h00." },
+        { q: "Quels sont vos horaires d'ouverture ?", a: "Nous sommes ouverts du samedi au jeudi, de 08h00 à 22h00. Le vendredi de 08h00 à 12h00." },
         { q: "Y a-t-il du coaching personnalisé ?", a: "Oui. Tous nos coachs proposent un suivi individuel. Des bilans gratuits sont disponibles sur rendez-vous." },
         { q: "Peut-on essayer avant de s'abonner ?", a: "Absolument. Nous offrons une séance d'essai gratuite pour tous les nouveaux membres." },
         { q: "Y a-t-il un parking ?", a: "Oui, un parking sécurisé et surveillé est disponible pour tous nos membres." },
@@ -132,7 +134,7 @@ const TRANSLATIONS = {
       heroSubtitle: "انضم إلى النخبة. تدريب شخصي، فنون قتالية وكمال أجسام على أعلى مستوى — بإشراف الكوتش سيفاكس.",
       cta: "ابدأ الآن",
       ctaSecondary: "عرض الأسعار",
-      stats: { members: "+1500\nعضو", coaches: "12\nخبير", space: "800م²\nمساحة", years: "+10\nسنوات خبرة" }
+      stats: { members: "+1500\nعضو", coaches: "خبير\nتدريب", space: "800م²\nمساحة", years: "+35\nسنة خبرة" }
     },
     disciplines: {
       title: "تخصصاتنا",
@@ -233,33 +235,47 @@ const SUBSCRIPTIONS = [
   },
 ];
 
+const LOCATIONS = [
+  { id: 'kouba',       name: { fr: 'Kouba',       ar: 'كوبا'        }, address: { fr: 'P39R+H22, Kouba',                              ar: 'P39R+H22، كوبا'                              }, mapsUrl: 'https://maps.google.com/?q=P39R%2BH22+Kouba+Algeria' },
+  { id: 'cheraga',     name: { fr: 'Chéraga',     ar: 'شراقة'       }, address: { fr: "Route d'Ouled Fayet Amara, 142, Chéraga",        ar: 'طريق أولاد فايت عمارة، 142، شراقة'           }, mapsUrl: "https://maps.google.com/?q=Route+d'Ouled+Fayet+Amara+142+Cheraga+Algeria" },
+  { id: 'khraicia',   name: { fr: 'Khraicia',    ar: 'خرايسية'     }, address: { fr: 'M25G+CF8, Khraicia',                            ar: 'M25G+CF8، خرايسية'                           }, mapsUrl: 'https://maps.google.com/?q=M25G%2BCF8+Khraicia+Algeria' },
+  { id: 'bab-ezzouar', name: { fr: 'Bab Ezzouar', ar: 'باب الزوار'  }, address: { fr: 'P5GM+HCP, Bab Ezzouar',                        ar: 'P5GM+HCP، باب الزوار'                        }, mapsUrl: 'https://maps.google.com/?q=P5GM%2BHCP+Bab+Ezzouar+Algeria' },
+];
+
+const SCHEDULE_BY_LOCATION: Record<string, { day: { fr: string; ar: string }; time: string; course: { fr: string; ar: string }; trainer: string; type: string }[]> = {
+  'kouba': [],
+  'cheraga': [],
+  'khraicia': [],
+  'bab-ezzouar': [],
+};
+
 const TRAINERS = [
   {
     name: 'Coach Sifaks',
     specialty: { fr: 'Arts Martiaux & Fitness', ar: 'فنون قتالية ولياقة' },
-    exp: '15',
-    image: 'https://images.unsplash.com/photo-1567013127542-490d757e6349?q=80&w=600&auto=format&fit=crop',
-    bio: { fr: "Fondateur du club et expert en arts martiaux mixtes. Coach Sifaks combine la discipline du combat avec la science moderne du fitness pour des résultats exceptionnels.", ar: "مؤسس النادي وخبير في الفنون القتالية المختلطة. يجمع الكوتش سيفاكس بين انضباط القتال وعلم اللياقة الحديث لتحقيق نتائج استثنائية." }
+    exp: '35',
+    image: '/images/coach-sifaks.jpg',
+    bio: { fr: "Fondateur du Club Sifaks, avec plus de 35 ans d'expérience dans les arts martiaux et le fitness. Coach Sifaks a façonné des centaines de champions à travers ses quatre salles à Kouba, Chéraga, Khraicia et Bab Ezzouar — alliant rigueur militaire et science moderne de l'entraînement.", ar: "مؤسس نادي سيفاكس، بأكثر من 35 سنة من الخبرة في فنون قتالية واللياقة البدنية. الكوتش سيفاكس صنع مئات الأبطال عبر قاعاته الأربع في كوبا وشراقة وخرايسية وباب الزوار، جامعاً بين الصرامة العسكرية وعلم التدريب الحديث." }
   },
   {
     name: 'Karim Benali',
     specialty: { fr: 'Vo Vietnam & Force', ar: 'فو فيتنام والقوة' },
     exp: '8',
-    image: 'https://images.unsplash.com/photo-1534367610401-9f5ed68180aa?q=80&w=600&auto=format&fit=crop',
-    bio: { fr: "Expert en Vo Vietnam et spécialiste en préparation physique. Karim vous apprendra l'art du combat traditionnel vietnamien, alliant puissance et précision.", ar: "خبير في فو فيتنام ومتخصص في الإعداد البدني. سيعلمك كريم فن القتال الفيتنامي التقليدي، الذي يجمع بين القوة والدقة." }
+    image: '',
+    bio: { fr: "Expert en Vo Vietnam et spécialiste en préparation physique. Karim vous apprendra l'art du combat traditionnel vietnamien, alliant puissance et précision.", ar: "خبير في فو فيتنام ومتخصص في الإعداد البدني. سيعلمك كريم فن القتال الفيتنامي التقليدي الذي يجمع بين القوة والدقة." }
   },
   {
     name: 'Omar Ziani',
     specialty: { fr: 'Taekwondo & Cardio', ar: 'تايكوندو وكارديو' },
     exp: '5',
-    image: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?q=80&w=600&auto=format&fit=crop',
+    image: '',
     bio: { fr: "Ancien compétiteur national de Taekwondo, Omar apporte agilité, explosivité et rigueur à vos entraînements cardio et de frappe.", ar: "متنافس سابق على المستوى الوطني في التايكوندو، يضفي عمر الرشاقة والانفجارية والصرامة على تدريبات الكارديو والضربات." }
   },
   {
     name: 'Amine Djebbar',
     specialty: { fr: 'Vo Vietnam & CrossFit', ar: 'فو فيتنام وكروس فيت' },
     exp: '6',
-    image: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=600&auto=format&fit=crop',
+    image: '',
     bio: { fr: "Maître de Vo Vietnam spécialisé dans l'entraînement fonctionnel. Amine forge le corps et l'esprit à travers le mouvement, la force et la discipline traditionnelle.", ar: "ماستر في فو فيتنام متخصص في التدريب الوظيفي. يصقل أمين الجسم والعقل من خلال الحركة والقوة والانضباط التقليدي." }
   },
 ];
@@ -363,6 +379,7 @@ function MediaCard({
 }: VideoCardProps & { type: 'video' | 'image' }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
+  const [muted, setMuted] = useState(true);
   const [loaded, setLoaded] = useState(false);
 
   const handleMouseEnter = () => {
@@ -380,12 +397,26 @@ function MediaCard({
       setPlaying(false);
     }
   };
+
+  const toggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setMuted(videoRef.current.muted);
+    }
+  };
   const handleTap = () => {
     if (type === 'image') return;
     if (!videoRef.current) return;
     if (playing) {
-      videoRef.current.pause(); setPlaying(false);
+      videoRef.current.pause(); 
+      setPlaying(false);
     } else {
+      // Pour une lecture initiée par l'utilisateur, on peut tenter d'activer le son
+      if (muted) {
+        videoRef.current.muted = false;
+        setMuted(false);
+      }
       videoRef.current.play().then(() => setPlaying(true)).catch(() => {});
     }
   };
@@ -415,6 +446,7 @@ function MediaCard({
           ref={videoRef}
           src={src}
           loop
+          muted
           playsInline
           preload="metadata"
           onLoadedMetadata={() => setLoaded(true)}
@@ -457,6 +489,17 @@ function MediaCard({
         </div>
       )}
 
+      {type === 'video' && (
+        <button
+          onClick={toggleMute}
+          className={`absolute bottom-4 right-4 z-20 p-2 rounded-full bg-black/40 border border-white/10 backdrop-blur-sm text-white/70 hover:text-white hover:bg-black/60 transition-all duration-300
+            ${playing ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'}
+          `}
+        >
+          {muted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+        </button>
+      )}
+
       <div className={`absolute left-0 top-0 bottom-0 w-0.5 bg-red-600 origin-top transition-transform duration-500 ${(playing && type === 'video') ? 'scale-y-100' : 'scale-y-0'}`} />
 
       <div className="absolute inset-x-0 bottom-0 z-10 p-5 translate-y-2 group-hover:translate-y-0 transition-transform duration-400">
@@ -497,6 +540,7 @@ export default function App() {
   const [selectedTrainer, setSelectedTrainer] = useState<number | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState<string>('kouba');
   const heroRef = useRef<HTMLDivElement>(null);
   const scheduleRef = useRef<HTMLDivElement>(null);
   const subscriptionsRef = useRef<HTMLDivElement>(null);
@@ -844,40 +888,94 @@ export default function App() {
 
                 {/* ── SCHEDULE ── */}
                 {activeTab === 'schedule' && (
-                  <div ref={scheduleRef} className="overflow-x-auto">
-                    <table className="w-full border-collapse">
-                      <thead>
-                        <tr className="border-b border-white/10">
-                          {[t.schedule.day, t.schedule.time, t.schedule.course, t.schedule.coach].map((h) => (
-                            <th key={h} className={`py-4 px-5 text-[10px] font-black tracking-[0.3em] uppercase text-red-500 ${isRtl ? 'text-right' : 'text-left'}`}>{h}</th>
-                          ))}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {SCHEDULE_DATA.map((item, i) => (
-                          <motion.tr
-                            key={i}
-                            initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}
-                            className="border-b border-white/5 hover:bg-white/3 transition-colors group"
-                          >
-                            <td className="py-5 px-5 font-bold text-white/80">{item.day[lang]}</td>
-                            <td className="py-5 px-5 font-mono text-sm text-white/50">{item.time}</td>
-                            <td className="py-5 px-5">
-                              <div className="flex items-center gap-3">
-                                <span className="font-bold text-lg group-hover:text-red-400 transition-colors">{item.course[lang]}</span>
-                                <span className={`text-[10px] font-black px-2 py-0.5 border uppercase tracking-wider ${typeColors[item.type]}`}>
-                                  {item.type === 'martial' ? (lang === 'fr' ? 'Martial' : 'قتالي') : 'CrossFit'}
-                                </span>
-                              </div>
-                            </td>
-                            <td className="py-5 px-5 text-white/40 text-sm italic">{item.trainer}</td>
-                          </motion.tr>
-                        ))}
-                      </tbody>
-                    </table>
+                  <div ref={scheduleRef}>
+                    {/* Location tabs */}
+                    <div className="flex flex-wrap gap-2 mb-8">
+                      {LOCATIONS.map((loc) => (
+                        <button
+                          key={loc.id}
+                          onClick={() => setSelectedLocation(loc.id)}
+                          className={`flex items-center gap-2 px-5 py-2.5 text-xs font-black uppercase tracking-widest transition-all duration-300 ${
+                            selectedLocation === loc.id
+                              ? 'bg-red-600 text-white'
+                              : 'border border-white/10 text-white/40 hover:border-red-500/40 hover:text-white'
+                          }`}
+                        >
+                          <MapPin className="w-3.5 h-3.5" />
+                          {loc.name[lang]}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Location address bar */}
+                    {(() => {
+                      const loc = LOCATIONS.find(l => l.id === selectedLocation)!;
+                      return (
+                        <div className="flex items-center gap-3 mb-8 p-4 border border-white/5 bg-white/2">
+                          <MapPin className="w-4 h-4 text-red-500 shrink-0" />
+                          <span className="text-white/50 text-sm">{loc.address[lang]}</span>
+                          <a href={loc.mapsUrl} target="_blank" rel="noopener noreferrer"
+                            className="ml-auto text-[10px] font-black uppercase tracking-widest text-red-500 hover:text-red-400 transition-colors whitespace-nowrap">
+                            {lang === 'fr' ? 'Voir sur Maps →' : 'عرض على الخرائط →'}
+                          </a>
+                        </div>
+                      );
+                    })()}
+
+                    {/* Schedule table or empty state */}
+                    {SCHEDULE_BY_LOCATION[selectedLocation].length > 0 ? (
+                      <>
+                        <table className="w-full border-collapse">
+                          <thead>
+                            <tr className="border-b border-white/10">
+                              {[t.schedule.day, t.schedule.time, t.schedule.course, t.schedule.coach].map((h) => (
+                                <th key={h} className={`py-4 px-5 text-[10px] font-black tracking-[0.3em] uppercase text-red-500 ${isRtl ? 'text-right' : 'text-left'}`}>{h}</th>
+                              ))}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {SCHEDULE_BY_LOCATION[selectedLocation].map((item, i) => (
+                              <motion.tr
+                                key={i}
+                                initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}
+                                className="border-b border-white/5 hover:bg-white/3 transition-colors group"
+                              >
+                                <td className="py-5 px-5 font-bold text-white/80">{item.day[lang]}</td>
+                                <td className="py-5 px-5 font-mono text-sm text-white/50">{item.time}</td>
+                                <td className="py-5 px-5">
+                                  <div className="flex items-center gap-3">
+                                    <span className="font-bold text-lg group-hover:text-red-400 transition-colors">{item.course[lang]}</span>
+                                    <span className={`text-[10px] font-black px-2 py-0.5 border uppercase tracking-wider ${typeColors[item.type]}`}>
+                                      {item.type === 'martial' ? (lang === 'fr' ? 'Martial' : 'قتالي') : 'CrossFit'}
+                                    </span>
+                                  </div>
+                                </td>
+                                <td className="py-5 px-5 text-white/40 text-sm italic">{item.trainer}</td>
+                              </motion.tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </>
+                    ) : (
+                      <motion.div
+                        initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+                        className="border border-white/5 bg-white/2 py-20 flex flex-col items-center gap-4 text-center"
+                      >
+                        <Clock className="w-10 h-10 text-red-500/30" />
+                        <div className="font-display text-2xl uppercase text-white/20">
+                          {lang === 'fr' ? 'Planning à venir' : 'الجدول قريباً'}
+                        </div>
+                        <div className="text-white/20 text-sm max-w-xs">
+                          {lang === 'fr'
+                            ? 'Les horaires de cette salle seront disponibles très prochainement.'
+                            : 'ستتوفر مواعيد هذه القاعة قريباً جداً.'}
+                        </div>
+                      </motion.div>
+                    )}
+
                     <div className="mt-8 flex items-center gap-3 text-white/30 text-sm">
                       <Clock className="w-4 h-4 text-red-500" />
-                      {lang === 'fr' ? 'Ouvert Sam–Jeu 06h00–22h00' : 'مفتوح السبت–الخميس 06:00–22:00'}
+                      {lang === 'fr' ? 'Toutes nos salles : Sam–Jeu 08h00–22h00' : 'جميع قاعاتنا: السبت–الخميس 08:00–22:00'}
                     </div>
                   </div>
                 )}
@@ -1060,8 +1158,15 @@ export default function App() {
                         onClick={() => setSelectedTrainer(i)}
                         className="group cursor-pointer"
                       >
-                        <div className="relative overflow-hidden mb-4" style={{ aspectRatio: '3/4' }}>
-                          <img src={trainer.image} alt={trainer.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" referrerPolicy="no-referrer" />
+                        <div className="relative overflow-hidden mb-4 bg-black/40" style={{ aspectRatio: '3/4' }}>
+                          {trainer.image ? (
+                            <img src={trainer.image} alt={trainer.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" referrerPolicy="no-referrer" />
+                          ) : (
+                            <div className="w-full h-full flex flex-col items-center justify-center bg-white/5 group-hover:bg-red-500/5 transition-colors">
+                              <Users className="w-12 h-12 text-white/10 group-hover:text-red-500/20 transition-all duration-500" />
+                              <div className="mt-4 text-[8px] font-black uppercase tracking-[0.3em] text-white/10 group-hover:text-red-500/20">{lang === 'fr' ? 'Photo indisponible' : 'الصورة غير متوفرة'}</div>
+                            </div>
+                          )}
                           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
                           <div className="absolute inset-0 border border-transparent group-hover:border-red-500/30 transition-colors" />
                           <div className="absolute bottom-0 left-0 right-0 p-5">
@@ -1080,72 +1185,107 @@ export default function App() {
 
                 {/* ── CONTACT ── */}
                 {activeTab === 'contact' && (
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                  <div className="space-y-16">
+
+                    {/* ── NOS SALLES ── */}
                     <div>
-                      <div className="space-y-6 mb-10">
-                        {[
-                          { icon: MapPin, label: 'Adresse', value: 'Alger, Algérie' },
-                          { icon: Phone, label: 'Téléphone', value: '0560 05 78 48' },
-                          { icon: Mail, label: 'Email', value: 'clubsifaks@yahoo.fr' },
-                          { icon: Clock, label: lang === 'fr' ? 'Horaires' : 'المواعيد', value: lang === 'fr' ? 'Sam–Jeu : 06h–22h' : 'السبت–الخميس: 06:00–22:00' },
-                        ].map(({ icon: Icon, label, value }, i) => (
-                          <motion.div
-                            key={i}
-                            initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.08 }}
-                            className="flex items-center gap-5 group"
+                      <div className="flex items-center gap-3 mb-8">
+                        <div className="h-px w-8 bg-red-500" />
+                        <span className="text-red-500 text-[10px] font-black tracking-[0.3em] uppercase">
+                          {lang === 'fr' ? 'Nos 4 Salles' : 'قاعاتنا الأربع'}
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+                        {LOCATIONS.map((loc, i) => (
+                          <motion.a
+                            key={loc.id}
+                            href={loc.mapsUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }}
+                            className="group flex flex-col gap-3 p-6 border border-white/8 hover:border-red-500/40 bg-white/2 hover:bg-red-500/5 transition-all duration-300"
                           >
-                            <div className="w-12 h-12 border border-white/10 group-hover:border-red-500/40 flex items-center justify-center transition-colors shrink-0">
-                              <Icon className="w-5 h-5 text-red-500" />
+                            <div className="w-10 h-10 border border-white/10 group-hover:border-red-500/40 flex items-center justify-center transition-colors shrink-0">
+                              <MapPin className="w-5 h-5 text-red-500" />
                             </div>
                             <div>
-                              <div className="text-[10px] text-white/30 font-black uppercase tracking-widest">{label}</div>
-                              <div className="text-white font-medium mt-0.5">{value}</div>
+                              <div className="font-display text-2xl uppercase text-white group-hover:text-red-400 transition-colors">{loc.name[lang]}</div>
+                              <div className="text-white/40 text-xs mt-1.5 leading-relaxed">{loc.address[lang]}</div>
                             </div>
-                          </motion.div>
-                        ))}
-                      </div>
-
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                        {[
-                          { icon: Facebook, label: 'Facebook', href: 'https://www.facebook.com/ClubSifaks', color: 'hover:border-blue-500/50 hover:text-blue-400' },
-                          { icon: MessageCircle, label: 'Instagram', href: 'https://www.instagram.com/clubsifaks/', color: 'hover:border-pink-500/50 hover:text-pink-400' },
-                          { icon: Zap, label: 'TikTok', href: 'https://www.tiktok.com/@coachsifaks?_r=1&_t=ZS-95JK635jTyH', color: 'hover:border-white/50 hover:text-white' },
-                          { icon: Phone, label: 'Appeler', href: 'tel:0560057848', color: 'hover:border-red-500/50 hover:text-red-400' },
-                        ].map(({ icon: Icon, label, href, color }, i) => (
-                          <a key={i} href={href} target="_blank" rel="noopener noreferrer"
-                            className={`flex items-center gap-3 p-4 border border-white/8 text-white/40 font-bold text-xs uppercase tracking-widest transition-all duration-300 ${color}`}>
-                            <Icon className="w-4 h-4" />
-                            {label}
-                          </a>
+                            <div className="mt-auto text-[10px] font-black uppercase tracking-widest text-red-500/60 group-hover:text-red-400 transition-colors">
+                              {lang === 'fr' ? 'Voir sur Maps →' : 'عرض على الخرائط →'}
+                            </div>
+                          </motion.a>
                         ))}
                       </div>
                     </div>
 
-                    {/* FAQ */}
-                    <div>
-                      <div className="text-[10px] text-red-500 font-black tracking-[0.3em] uppercase mb-6">{t.faq.title}</div>
-                      <div className="space-y-0">
-                        {t.faq.items.map((item, i) => (
-                          <motion.div key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.08 }}>
-                            <button
-                              onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                              className="w-full flex items-center justify-between gap-4 py-5 border-b border-white/8 text-left group"
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                      <div>
+                        <div className="space-y-6 mb-10">
+                          {[
+                            { icon: Phone, label: lang === 'fr' ? 'Téléphone' : 'الهاتف', value: '0560 05 78 48' },
+                            { icon: Mail, label: 'Email', value: 'clubsifaks@yahoo.fr' },
+                            { icon: Clock, label: lang === 'fr' ? 'Horaires' : 'المواعيد', value: lang === 'fr' ? 'Sam–Jeu : 08h00–22h00' : 'السبت–الخميس: 08:00–22:00' },
+                          ].map(({ icon: Icon, label, value }, i) => (
+                            <motion.div
+                              key={i}
+                              initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.08 }}
+                              className="flex items-center gap-5 group"
                             >
-                              <span className={`font-bold text-sm group-hover:text-red-400 transition-colors ${isRtl ? 'text-right' : ''}`}>{item.q}</span>
-                              <ChevronDown className={`w-4 h-4 text-white/30 shrink-0 transition-transform ${openFaq === i ? 'rotate-180 text-red-500' : ''}`} />
-                            </button>
-                            <AnimatePresence>
-                              {openFaq === i && (
-                                <motion.div
-                                  initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}
-                                  className="overflow-hidden"
-                                >
-                                  <p className={`py-4 text-white/50 text-sm leading-relaxed border-b border-white/5 ${isRtl ? 'text-right' : ''}`}>{item.a}</p>
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
-                          </motion.div>
-                        ))}
+                              <div className="w-12 h-12 border border-white/10 group-hover:border-red-500/40 flex items-center justify-center transition-colors shrink-0">
+                                <Icon className="w-5 h-5 text-red-500" />
+                              </div>
+                              <div>
+                                <div className="text-[10px] text-white/30 font-black uppercase tracking-widest">{label}</div>
+                                <div className="text-white font-medium mt-0.5">{value}</div>
+                              </div>
+                            </motion.div>
+                          ))}
+                        </div>
+
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                          {[
+                            { icon: Facebook, label: 'Facebook', href: 'https://www.facebook.com/ClubSifaks', color: 'hover:border-blue-500/50 hover:text-blue-400' },
+                            { icon: MessageCircle, label: 'Instagram', href: 'https://www.instagram.com/clubsifaks/', color: 'hover:border-pink-500/50 hover:text-pink-400' },
+                            { icon: Zap, label: 'TikTok', href: 'https://www.tiktok.com/@coachsifaks?_r=1&_t=ZS-95JK635jTyH', color: 'hover:border-white/50 hover:text-white' },
+                            { icon: Phone, label: lang === 'fr' ? 'Appeler' : 'اتصل', href: 'tel:0560057848', color: 'hover:border-red-500/50 hover:text-red-400' },
+                          ].map(({ icon: Icon, label, href, color }, i) => (
+                            <a key={i} href={href} target="_blank" rel="noopener noreferrer"
+                              className={`flex items-center gap-3 p-4 border border-white/8 text-white/40 font-bold text-xs uppercase tracking-widest transition-all duration-300 ${color}`}>
+                              <Icon className="w-4 h-4" />
+                              {label}
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* FAQ */}
+                      <div>
+                        <div className="text-[10px] text-red-500 font-black tracking-[0.3em] uppercase mb-6">{t.faq.title}</div>
+                        <div className="space-y-0">
+                          {t.faq.items.map((item, i) => (
+                            <motion.div key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.08 }}>
+                              <button
+                                onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                                className="w-full flex items-center justify-between gap-4 py-5 border-b border-white/8 text-left group"
+                              >
+                                <span className={`font-bold text-sm group-hover:text-red-400 transition-colors ${isRtl ? 'text-right' : ''}`}>{item.q}</span>
+                                <ChevronDown className={`w-4 h-4 text-white/30 shrink-0 transition-transform ${openFaq === i ? 'rotate-180 text-red-500' : ''}`} />
+                              </button>
+                              <AnimatePresence>
+                                {openFaq === i && (
+                                  <motion.div
+                                    initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}
+                                    className="overflow-hidden"
+                                  >
+                                    <p className={`py-4 text-white/50 text-sm leading-relaxed border-b border-white/5 ${isRtl ? 'text-right' : ''}`}>{item.a}</p>
+                                  </motion.div>
+                                )}
+                              </AnimatePresence>
+                            </motion.div>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1235,9 +1375,16 @@ export default function App() {
                 <X className="w-5 h-5" />
               </button>
 
-              <div className="md:w-5/12 aspect-square md:aspect-auto relative" style={{ minHeight: '360px' }}>
-                <img src={TRAINERS[selectedTrainer].image} alt={TRAINERS[selectedTrainer].name}
-                  className="w-full h-full object-cover grayscale" referrerPolicy="no-referrer" />
+              <div className="md:w-5/12 aspect-square md:aspect-auto relative bg-black/40" style={{ minHeight: '360px' }}>
+                {TRAINERS[selectedTrainer].image ? (
+                  <img src={TRAINERS[selectedTrainer].image} alt={TRAINERS[selectedTrainer].name}
+                    className="w-full h-full object-cover grayscale" referrerPolicy="no-referrer" />
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center bg-white/5">
+                    <Users className="w-16 h-16 text-white/10" />
+                    <div className="mt-4 text-[9px] font-black uppercase tracking-[0.3em] text-white/10">{lang === 'fr' ? 'Photo indisponible' : 'الصورة غير متوفرة'}</div>
+                  </div>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
               </div>
 
