@@ -678,6 +678,9 @@ export default function App() {
   const [lang, setLang] = useState<Language>('fr');
   const [activeTab, setActiveTab] = useState<TabType>('home');
   const [prevTab, setPrevTab] = useState<TabType>('home');
+  const [cookieConsent, setCookieConsent] = useState<string | null>(
+    localStorage.getItem('cookieConsent')
+  );
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
   const [bmiResult, setBmiResult] = useState<{ value: number; status: string; color: string } | null>(null);
@@ -1601,6 +1604,39 @@ export default function App() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* 🍪 Gestion des Cookies (RGPD) */}
+      {!cookieConsent && (
+        <div className="fixed bottom-0 left-0 right-0 z-[999] bg-black border-t border-white/10 p-6 backdrop-blur-md bg-black/80">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <p className="text-white/80 text-sm leading-relaxed text-center md:text-left">
+              {lang === 'fr' 
+                ? 'Nous utilisons des cookies pour améliorer votre expérience. En continuant, vous acceptez notre politique de confidentialité.'
+                : 'نستخدم ملفات تعريف الارتباط لتحسين تجربتك. بالمتابعة، فإنك توافق على سياسة الخصوصية الخاصة بنا.'}
+            </p>
+            <div className="flex gap-4">
+              <button
+                onClick={() => {
+                  localStorage.setItem('cookieConsent', 'true');
+                  setCookieConsent('true');
+                }}
+                className="bg-red-600 hover:bg-red-500 px-8 py-3 text-xs font-black uppercase tracking-widest transition-all duration-300"
+              >
+                {lang === 'fr' ? 'Accepter' : 'قبول'}
+              </button>
+              <button
+                onClick={() => {
+                  localStorage.setItem('cookieConsent', 'false');
+                  setCookieConsent('false');
+                }}
+                className="border border-white/20 hover:border-white/40 px-8 py-3 text-xs font-black uppercase tracking-widest transition-all duration-300 text-white/60 hover:text-white"
+              >
+                {lang === 'fr' ? 'Refuser' : 'رفض'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Ghost watermark */}
       <div className="fixed bottom-0 inset-x-0 pointer-events-none select-none overflow-hidden opacity-[0.025]">

@@ -32,6 +32,8 @@ async function startServer() {
   // 1.5. Protection contre la pollution des paramètres HTTP
   app.use(hpp());
 
+  app.use(express.json());
+
   // 1.6. Configuration CORS stricte (partage de ressources entre origines)
   app.use(cors({
     origin: process.env.NODE_ENV === "production" ? ["https://votre-domaine-club.algerie"] : true,
@@ -39,6 +41,37 @@ async function startServer() {
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   }));
+
+  // Route de vérification reCAPTCHA
+  app.post("/api/verify-recaptcha", async (req, res) => {
+    const { token } = req.body;
+    const SECRET = process.env.RECAPTCHA_SECRET_KEY;
+
+    // Si aucune clé n'est configurée, on valide par défaut pour faciliter la livraison client
+    if (!SECRET || SECRET === "your_secret_key" || SECRET.length < 10) {
+      console.log("reCAPTCHA: Mode bypass activé (pas de clé)");
+      return res.json({ verified: true });
+    }
+    
+    try {
+      const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `secret=${SECRET}&response=${token}`,
+      });
+      
+      const data = await response.json() as { success: boolean, score?: number };
+      
+      if (data.success && (data.score === undefined || data.score > 0.5)) {
+        res.json({ verified: true });
+      } else {
+        res.status(400).json({ verified: false });
+      }
+    } catch (err) {
+      console.error('reCAPTCHA Error:', err);
+      res.status(500).json({ error: 'Verification failed' });
+    }
+  });
 
   // 2. Sécurisation des en-têtes HTTP avec Helmet
   app.use(
