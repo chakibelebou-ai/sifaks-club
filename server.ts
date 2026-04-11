@@ -77,7 +77,7 @@ async function startServer() {
         includeSubDomains: true,
         preload: true,
       },
-      xContentOpenerPolicy: { policy: "same-origin" },
+      crossOriginOpenerPolicy: { policy: "same-origin" },
       referrerPolicy: { policy: "strict-origin-when-cross-origin" },
     })
   );

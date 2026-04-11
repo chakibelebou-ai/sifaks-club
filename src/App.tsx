@@ -108,7 +108,7 @@ const TRANSLATIONS = {
       title: "Questions Fréquentes",
       items: [
         { q: "Quels sont vos horaires d'ouverture ?", a: "Nous sommes ouverts du samedi au jeudi, de 08h00 à 22h00. Le vendredi de 08h00 à 12h00." },
-        { q: "Y a-t-il du coaching personnalisé ?", a: "Oui. Tous nos coachs proposent un suivi individuel. Des bilans gratuits sont disponibles sur rendez-vous." },
+        { q: "Y a-t-il du coaching personnalisé ?", a: "Oui. Le Coach Sifaks propose un suivi individuel de haute performance. Des bilans gratuits sont disponibles sur rendez-vous." },
         { q: "Peut-on essayer avant de s'abonner ?", a: "Absolument. Nous offrons une séance d'essai gratuite pour tous les nouveaux membres." },
         { q: "Y a-t-il un parking ?", a: "Oui, un parking sécurisé et surveillé est disponible pour tous nos membres." },
       ]
@@ -169,8 +169,8 @@ const TRANSLATIONS = {
     faq: {
       title: "الأسئلة الشائعة",
       items: [
-        { q: "ما هي أوقات العمل؟", a: "نحن مفتوحون من السبت إلى الخميس من 06:00 إلى 22:00. الجمعة من 08:00 إلى 12:00." },
-        { q: "هل يوجد تدريب شخصي؟", a: "نعم. جميع مدربينا يقدمون متابعة فردية. تقييمات مجانية متاحة عند الطلب." },
+        { q: "ما هي أوقات العمل؟", a: "نحن مفتوحون من السبت إلى الخميس من 08:00 إلى 22:00. الجمعة من 08:00 إلى 12:00." },
+        { q: "هل يوجد تدريب شخصي؟", a: "نعم. الكوتش سيفاكس يقدم متابعة فردية عالية الأداء. تقييمات مجانية متاحة عند الطلب." },
         { q: "هل يمكن التجربة قبل الاشتراك؟", a: "بالتأكيد. نقدم حصة تجريبية مجانية لجميع الأعضاء الجدد." },
         { q: "هل يوجد موقف سيارات؟", a: "نعم، موقف سيارات آمن ومراقب متاح لجميع أعضائنا." },
       ]
@@ -242,42 +242,188 @@ const LOCATIONS = [
   { id: 'bab-ezzouar', name: { fr: 'Bab Ezzouar', ar: 'باب الزوار'  }, address: { fr: 'P5GM+HCP, Bab Ezzouar',                        ar: 'P5GM+HCP، باب الزوار'                        }, mapsUrl: 'https://maps.google.com/?q=P5GM%2BHCP+Bab+Ezzouar+Algeria' },
 ];
 
-const SCHEDULE_BY_LOCATION: Record<string, { day: { fr: string; ar: string }; time: string; course: { fr: string; ar: string }; trainer: string; type: string }[]> = {
-  'kouba': [],
-  'cheraga': [],
-  'khraicia': [],
-  'bab-ezzouar': [],
+const SCHEDULE_BY_LOCATION: Record<string, { femmes: any[]; hommes: any[] }> = {
+  'kouba': {
+    femmes: [
+      { day: { fr: 'Dimanche', ar: 'الأحد' }, time: '08:00–15:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Dimanche', ar: 'الأحد' }, time: '10:00–11:00', course: { fr: 'CROSSIFAKS / RPM', ar: 'كروسيفاكس / RPM' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Dimanche', ar: 'الأحد' }, time: '12:00–13:00', course: { fr: 'Body Attack / Objectif Minceur', ar: 'هدف الرشاقة / بودي أتاك' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Lundi', ar: 'الإثنين' }, time: '15:00–20:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Lundi', ar: 'الإثنين' }, time: '16:30–17:30', course: { fr: 'RPM / Objectif Minceur', ar: 'RPM / هدف الرشاقة' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Lundi', ar: 'الإثنين' }, time: '17:30–18:30', course: { fr: 'Body Pump / CROSSIFAKS', ar: 'بودي بومب / كروسيفاكس' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '08:00–15:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '10:00–11:00', course: { fr: 'CROSSIFAKS / RPM', ar: 'كروسيفاكس / RPM' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '12:00–13:00', course: { fr: 'Objectif Minceur / Body Attack', ar: 'هدف الرشاقة / بودي أتاك' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mercredi', ar: 'الأربعاء' }, time: '15:00–20:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mercredi', ar: 'الأربعاء' }, time: '16:30–17:30', course: { fr: 'Body Pump / Spécial Abdos', ar: 'بودي بومب / حصة البطن' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mercredi', ar: 'الأربعاء' }, time: '17:30–18:30', course: { fr: 'Body Attack / Objectif Minceur', ar: 'بودي أتاك / هدف الرشاقة' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Jeudi', ar: 'الخميس' }, time: '08:00–15:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Jeudi', ar: 'الخميس' }, time: '10:00–11:00', course: { fr: 'Objectif Minceur / Body Pump', ar: 'هدف الرشاقة / بودي بومب' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Jeudi', ar: 'الخميس' }, time: '12:00–13:00', course: { fr: 'CROSSIFAKS / Spécial Abdos', ar: 'كروسيفاكس / حصة البطن' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Vendredi', ar: 'الجمعة' }, time: '14:30–17:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '15:00–20:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '15:00–16:00', course: { fr: 'Gym Enfants (-12 ans)', ar: 'جيم للأطفال (أقل من 12 سنة)' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '16:30–17:30', course: { fr: 'Body Attack / CROSSIFAKS', ar: 'بودي أتاك / كروسيفاكس' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '17:30–18:30', course: { fr: 'RPM / Cuisses Abdos Fessiers', ar: 'RPM / أرداف وبطن' }, trainer: 'Coach Sifaks', type: 'martial' },
+    ],
+    hommes: [
+      { day: { fr: 'Dimanche', ar: 'الأحد' }, time: '16:00–22:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Dimanche', ar: 'الأحد' }, time: '17:00–18:00', course: { fr: 'RPM / Objectif Minceur', ar: 'RPM / هدف الرشاقة' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Dimanche', ar: 'الأحد' }, time: '18:00–19:00', course: { fr: 'Body Pump / CROSSIFAKS', ar: 'بودي بومب / كروسيفاكس' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Lundi', ar: 'الإثنين' }, time: '07:00–14:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Lundi', ar: 'الإثنين' }, time: '10:00–11:00', course: { fr: 'CROSSIFAKS / RPM', ar: 'كروسيفاكس / RPM' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Lundi', ar: 'الإثنين' }, time: '12:00–13:00', course: { fr: 'Objectif Minceur / Body Attack', ar: 'هدف الرشاقة / بودي أتاك' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '16:00–22:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '16:00–17:00', course: { fr: 'Gym Enfants (-12 ans)', ar: 'جيم للأطفال (أقل من 12 سنة)' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '17:00–18:00', course: { fr: 'Body Pump / Spécial Abdos', ar: 'بودي بومب / حصة البطن' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '18:00–19:00', course: { fr: 'Body Attack / Objectif Minceur', ar: 'بودي أتاك / هدف الرشاقة' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mercredi', ar: 'الأربعاء' }, time: '07:00–14:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mercredi', ar: 'الأربعاء' }, time: '10:00–11:00', course: { fr: 'Objectif Minceur / Body Pump', ar: 'هدف الرشاقة / بودي بومب' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mercredi', ar: 'الأربعاء' }, time: '12:00–13:00', course: { fr: 'CROSSIFAKS / Spécial Abdos', ar: 'كروسيفاكس / حصة البطن' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Jeudi', ar: 'الخميس' }, time: '16:00–22:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Jeudi', ar: 'الخميس' }, time: '17:00–18:00', course: { fr: 'Body Attack / CROSSIFAKS', ar: 'بودي أتاك / كروسيفاكس' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Jeudi', ar: 'الخميس' }, time: '18:00–19:00', course: { fr: 'RPM / Cuisses Abdos Fessiers', ar: 'RPM / أرداف وبطن' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Vendredi', ar: 'الجمعة' }, time: '17:00–20:00', course: { fr: 'Cardio Training & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '07:00–14:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '10:00–11:00', course: { fr: 'RPM / Taille-Abdos-Fessiers', ar: 'RPM / خصر-بطن-أرداف' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '12:00–13:00', course: { fr: 'CROSSIFAKS / Body Pump', ar: 'كروسيفاكس / بودي بومب' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+    ]
+  },
+  'cheraga': {
+    femmes: [
+      { day: { fr: 'Dimanche', ar: 'الأحد' }, time: '15:00–20:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Dimanche', ar: 'الأحد' }, time: '16:30–17:30', course: { fr: 'RPM / Objectif Minceur', ar: 'RPM / هدف الرشاقة' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Dimanche', ar: 'الأحد' }, time: '17:30–18:30', course: { fr: 'Body Pump / CROSSIFAKS', ar: 'بودي بومب / كروسيفاكس' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Lundi', ar: 'الإثنين' }, time: '08:00–15:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Lundi', ar: 'الإثنين' }, time: '10:00–11:00', course: { fr: 'CROSSIFAKS / RPM', ar: 'كروسيفاكس / RPM' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Lundi', ar: 'الإثنين' }, time: '12:00–13:00', course: { fr: 'Body Attack / Objectif Minceur', ar: 'بودي أتاك / هدف الرشاقة' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '15:00–20:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '15:00–16:00', course: { fr: 'Gym Enfants (-12 ans)', ar: 'جيم للأطفال (أقل من 12 سنة)' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '16:30–17:30', course: { fr: 'Body Pump / Spécial Abdos', ar: 'بودي بومب / حصة البطن' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '17:30–18:30', course: { fr: 'Body Attack / Objectif Minceur', ar: 'بودي أتاك / هدف الرشاقة' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mercredi', ar: 'الأربعاء' }, time: '08:00–15:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mercredi', ar: 'الأربعاء' }, time: '10:00–11:00', course: { fr: 'Objectif Minceur / Body Pump', ar: 'هدف الرشاقة / بودي بومب' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mercredi', ar: 'الأربعاء' }, time: '12:00–13:00', course: { fr: 'CROSSIFAKS / Spécial Abdos', ar: 'كروسيفاكس / حصة البطن' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Jeudi', ar: 'الخميس' }, time: '15:00–20:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Jeudi', ar: 'الخميس' }, time: '16:30–17:30', course: { fr: 'Body Attack / CROSSIFAKS', ar: 'بودي أتاك / كروسيفاكس' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Jeudi', ar: 'الخميس' }, time: '17:30–18:30', course: { fr: 'RPM / Cuisses Abdos Fessiers', ar: 'RPM / أرداف وبطن' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Vendredi', ar: 'الجمعة' }, time: '14:30–17:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '08:00–15:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '10:00–11:00', course: { fr: 'RPM / T.A.F', ar: 'RPM / T.A.F' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '12:00–13:00', course: { fr: 'CROSSIFAKS / Body Pump', ar: 'كروسيفاكس / بودي بومب' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+    ],
+    hommes: [
+      { day: { fr: 'Dimanche', ar: 'الأحد' }, time: '07:00–14:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Dimanche', ar: 'الأحد' }, time: '10:00–11:00', course: { fr: 'RPM', ar: 'RPM' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Dimanche', ar: 'الأحد' }, time: '12:00–13:00', course: { fr: 'CROSSIFAKS / Body Pump', ar: 'كروسيفاكس / بودي بومب' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Dimanche', ar: 'الأحد' }, time: '18:00–19:00', course: { fr: 'Body Pump / CROSSIFAKS', ar: 'بودي بومب / كروسيفاكس' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Lundi', ar: 'الإثنين' }, time: '16:00–22:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Lundi', ar: 'الإثنين' }, time: '17:00–18:00', course: { fr: 'RPM / Objectif Minceur', ar: 'RPM / هدف الرشاقة' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Lundi', ar: 'الإثنين' }, time: '18:00–19:00', course: { fr: 'Body Pump / CROSSIFAKS', ar: 'بودي بومب / كروسيفاكس' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '07:00–14:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '10:00–11:00', course: { fr: 'CROSSIFAKS / RPM', ar: 'كروسيفاكس / RPM' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '12:00–13:00', course: { fr: 'Objectif Minceur / Body Attack', ar: 'هدف الرشاقة / بودي أتاك' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mercredi', ar: 'الأربعاء' }, time: '16:00–22:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mercredi', ar: 'الأربعاء' }, time: '17:00–18:00', course: { fr: 'Body Pump / Spécial Abdos', ar: 'بودي بومب / حصة البطن' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mercredi', ar: 'الأربعاء' }, time: '18:00–19:00', course: { fr: 'Body Attack / Objectif Minceur', ar: 'بودي أتاك / هدف الرشاقة' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Jeudi', ar: 'الخميس' }, time: '07:00–14:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Jeudi', ar: 'الخميس' }, time: '10:00–11:00', course: { fr: 'Objectif Minceur / Body Pump', ar: 'هدف الرشاقة / بودي بومب' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Jeudi', ar: 'الخميس' }, time: '12:00–13:00', course: { fr: 'CROSSIFAKS / Spécial Abdos', ar: 'كروسيفاكس / حصة البطن' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Vendredi', ar: 'الجمعة' }, time: '17:00–20:00', course: { fr: 'Cardio Training & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '16:00–22:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '16:00–17:00', course: { fr: 'Gym Enfants (-12 ans)', ar: 'جيم للأطفال (أقل من 12 سنة)' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '17:00–18:00', course: { fr: 'Body Attack / CROSSIFAKS', ar: 'بودي أتاك / كروسيفاكس' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '18:00–19:00', course: { fr: 'RPM / Cuisses Abdos Fessiers', ar: 'RPM / أرداف وبطن' }, trainer: 'Coach Sifaks', type: 'martial' },
+    ]
+  },
+  'khraicia': {
+    femmes: [
+      { day: { fr: 'Lundi', ar: 'الإثنين' }, time: '14:00–20:00', course: { fr: 'Musculation / Accès Libre', ar: 'كمال أجسام / دخول حر' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Lundi', ar: 'الإثنين' }, time: '16:00–17:00', course: { fr: 'W.O.D (Workout of the Day)', ar: 'W.O.D (تمرین اليوم)' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Lundi', ar: 'الإثنين' }, time: '17:00–18:00', course: { fr: 'W.O.D (Workout of the Day)', ar: 'W.O.D (تمرین اليوم)' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Mercredi', ar: 'الأربعاء' }, time: '14:00–20:00', course: { fr: 'Musculation / Accès Libre', ar: 'كمال أجسام / دخول حر' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mercredi', ar: 'الأربعاء' }, time: '16:00–17:00', course: { fr: 'W.O.D (Workout of the Day)', ar: 'W.O.D (تمرین اليوم)' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Mercredi', ar: 'الأربعاء' }, time: '17:00–18:00', course: { fr: 'W.O.D (Workout of the Day)', ar: 'W.O.D (تمرین اليوم)' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '14:00–20:00', course: { fr: 'Musculation / Accès Libre', ar: 'كمال أجسام / دخول حر' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '16:00–17:00', course: { fr: 'W.O.D (Workout of the Day)', ar: 'W.O.D (تمرین اليوم)' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '17:00–18:00', course: { fr: 'W.O.D (Workout of the Day)', ar: 'W.O.D (تمرین اليوم)' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+    ],
+    hommes: [
+      { day: { fr: 'Dimanche', ar: 'الأحد' }, time: '08:00–22:00', course: { fr: 'Musculation / Accès Libre', ar: 'كمال أجسام / دخول حر' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Dimanche', ar: 'الأحد' }, time: '17:30–18:30', course: { fr: 'W.O.D', ar: 'W.O.D' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Dimanche', ar: 'الأحد' }, time: '19:00–20:00', course: { fr: 'W.O.D', ar: 'W.O.D' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Lundi', ar: 'الإثنين' }, time: '07:00–14:00', course: { fr: 'Musculation / Initiation', ar: 'كمال أجسام / مبادئ' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '08:00–22:00', course: { fr: 'Musculation / Accès Libre', ar: 'كمال أجسام / دخول حر' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '17:30–18:30', course: { fr: 'W.O.D', ar: 'W.O.D' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '19:00–20:00', course: { fr: 'W.O.D', ar: 'W.O.D' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Mercredi', ar: 'الأربعاء' }, time: '07:00–14:00', course: { fr: 'Musculation / Initiation', ar: 'كمال أجسام / مبادئ' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Jeudi', ar: 'الخميس' }, time: '08:00–22:00', course: { fr: 'Musculation / Accès Libre', ar: 'كمال أجسام / دخول حر' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Jeudi', ar: 'الخميس' }, time: '17:30–18:30', course: { fr: 'W.O.D', ar: 'W.O.D' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Jeudi', ar: 'الخميس' }, time: '19:00–20:00', course: { fr: 'W.O.D', ar: 'W.O.D' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '07:00–14:00', course: { fr: 'Musculation / Initiation', ar: 'كمال أجسام / مبادئ' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Vendredi', ar: 'الجمعة' }, time: '—', course: { fr: 'Réservé Compétitions', ar: 'مخصص للمسابقات' }, trainer: 'Coach Sifaks', type: 'martial' },
+    ]
+  },
+  'bab-ezzouar': {
+    femmes: [
+      { day: { fr: 'Dimanche', ar: 'الأحد' }, time: '15:00–20:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Dimanche', ar: 'الأحد' }, time: '16:30–17:30', course: { fr: 'RPM / Objectif Minceur', ar: 'RPM / هدف الرشاقة' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Dimanche', ar: 'الأحد' }, time: '17:30–18:30', course: { fr: 'Body Pump / CROSSIFAKS', ar: 'بودي بومب / كروسيفاكس' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Lundi', ar: 'الإثنين' }, time: '08:00–15:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Lundi', ar: 'الإثنين' }, time: '10:00–11:00', course: { fr: 'CROSSIFAKS / RPM', ar: 'كروسيفاكس / RPM' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Lundi', ar: 'الإثنين' }, time: '12:00–13:00', course: { fr: 'Body Attack / Objectif Minceur', ar: 'بودي أتاك / هدف الرشاقة' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '15:00–20:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '15:00–16:00', course: { fr: 'Gym Enfants (-12 ans)', ar: 'جيم للأطفال (أقل من 12 سنة)' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '16:30–17:30', course: { fr: 'Body Pump / Spécial Abdos', ar: 'بودي بومب / حصة البطن' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '17:30–18:30', course: { fr: 'Body Attack / Objectif Minceur', ar: 'بودي أتاك / هدف الرشاقة' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mercredi', ar: 'الأربعاء' }, time: '08:00–15:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mercredi', ar: 'الأربعاء' }, time: '10:00–11:00', course: { fr: 'Objectif Minceur / Body Pump', ar: 'هدف الرشاقة / بودي بومب' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mercredi', ar: 'الأربعاء' }, time: '12:00–13:00', course: { fr: 'CROSSIFAKS / Spécial Abdos', ar: 'كروسيفاكس / حصة البطن' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Jeudi', ar: 'الخميس' }, time: '15:00–20:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Jeudi', ar: 'الخميس' }, time: '16:30–17:30', course: { fr: 'Body Attack / CROSSIFAKS', ar: 'بودي أتاك / كروسيفاكس' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Jeudi', ar: 'الخميس' }, time: '17:30–18:30', course: { fr: 'RPM / Cuisses Abdos Fessiers', ar: 'RPM / أرداف وبطن' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Vendredi', ar: 'الجمعة' }, time: '14:30–17:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '08:00–15:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '10:00–11:00', course: { fr: 'RPM / T.A.F', ar: 'RPM / T.A.F' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '12:00–13:00', course: { fr: 'CROSSIFAKS / Body Pump', ar: 'كروسيفاكس / بودي بومب' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+    ],
+    hommes: [
+      { day: { fr: 'Dimanche', ar: 'الأحد' }, time: '07:00–14:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Dimanche', ar: 'الأحد' }, time: '10:00–11:00', course: { fr: 'RPM / Taille-Abdos-Fessiers', ar: 'RPM / خصر-بطن-أرداف' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Dimanche', ar: 'الأحد' }, time: '12:00–13:00', course: { fr: 'CROSSIFAKS / Body Pump', ar: 'كروسيفاكس / بودي بومب' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Dimanche', ar: 'الأحد' }, time: '18:00–19:00', course: { fr: 'Body Pump / CROSSIFAKS', ar: 'بودي بومب / كروسيفاكس' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Lundi', ar: 'الإثنين' }, time: '16:00–22:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Lundi', ar: 'الإثنين' }, time: '17:00–18:00', course: { fr: 'RPM / Objectif Minceur', ar: 'RPM / هدف الرشاقة' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Lundi', ar: 'الإثنين' }, time: '18:00–19:00', course: { fr: 'Body Pump / CROSSIFAKS', ar: 'بودي بومب / كروسيفاكس' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '07:00–14:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '10:00–11:00', course: { fr: 'CROSSIFAKS / RPM', ar: 'كروسيفاكس / RPM' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Mardi', ar: 'الثلاثاء' }, time: '12:00–13:00', course: { fr: 'Objectif Minceur / Body Attack', ar: 'هدف الرشاقة / بودي أتاك' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mercredi', ar: 'الأربعاء' }, time: '16:00–22:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mercredi', ar: 'الأربعاء' }, time: '17:00–18:00', course: { fr: 'Body Pump / Spécial Abdos', ar: 'بودي بومب / حصة البطن' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Mercredi', ar: 'الأربعاء' }, time: '18:00–19:00', course: { fr: 'Body Attack / Objectif Minceur', ar: 'بودي أتاك / هدف الرشاقة' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Jeudi', ar: 'الخميس' }, time: '07:00–14:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Jeudi', ar: 'الخميس' }, time: '10:00–11:00', course: { fr: 'Objectif Minceur / Body Pump', ar: 'هدف الرشاقة / بودي بومب' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Jeudi', ar: 'الخميس' }, time: '12:00–13:00', course: { fr: 'CROSSIFAKS / Spécial Abdos', ar: 'كروسيفاكس / حصة البطن' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Vendredi', ar: 'الجمعة' }, time: '17:00–20:00', course: { fr: 'Cardio Training & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '16:00–22:00', course: { fr: 'Cardio & Musculation', ar: 'كارديو وكمال أجسام' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '16:00–17:00', course: { fr: 'Gym Enfants (-12 ans)', ar: 'جيم للأطفال (أقل من 12 سنة)' }, trainer: 'Coach Sifaks', type: 'martial' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '17:00–18:00', course: { fr: 'Body Attack / CROSSIFAKS', ar: 'بودي أتاك / كروسيفاكس' }, trainer: 'Coach Sifaks', type: 'crossfit' },
+      { day: { fr: 'Samedi', ar: 'السبت' }, time: '18:00–19:00', course: { fr: 'RPM / Cuisses Abdos Fessiers', ar: 'RPM / أرداف وبطن' }, trainer: 'Coach Sifaks', type: 'martial' },
+    ]
+  },
 };
 
 const TRAINERS = [
   {
     name: 'Coach Sifaks',
-    specialty: { fr: 'Arts Martiaux & Fitness', ar: 'فنون قتالية ولياقة' },
+    specialty: { fr: 'Arts Martiaux & Fitness Haute Performance', ar: 'الفنون القتالية واللياقة البدنية عالية الأداء' },
     exp: '35',
     image: '/images/coach-sifaks.jpg',
-    bio: { fr: "Fondateur du Club Sifaks, avec plus de 35 ans d'expérience dans les arts martiaux et le fitness. Coach Sifaks a façonné des centaines de champions à travers ses quatre salles à Kouba, Chéraga, Khraicia et Bab Ezzouar — alliant rigueur militaire et science moderne de l'entraînement.", ar: "مؤسس نادي سيفاكس، بأكثر من 35 سنة من الخبرة في فنون قتالية واللياقة البدنية. الكوتش سيفاكس صنع مئات الأبطال عبر قاعاته الأربع في كوبا وشراقة وخرايسية وباب الزوار، جامعاً بين الصرامة العسكرية وعلم التدريب الحديث." }
-  },
-  {
-    name: 'Karim Benali',
-    specialty: { fr: 'Vo Vietnam & Force', ar: 'فو فيتنام والقوة' },
-    exp: '8',
-    image: '',
-    bio: { fr: "Expert en Vo Vietnam et spécialiste en préparation physique. Karim vous apprendra l'art du combat traditionnel vietnamien, alliant puissance et précision.", ar: "خبير في فو فيتنام ومتخصص في الإعداد البدني. سيعلمك كريم فن القتال الفيتنامي التقليدي الذي يجمع بين القوة والدقة." }
-  },
-  {
-    name: 'Omar Ziani',
-    specialty: { fr: 'Taekwondo & Cardio', ar: 'تايكوندو وكارديو' },
-    exp: '5',
-    image: '',
-    bio: { fr: "Ancien compétiteur national de Taekwondo, Omar apporte agilité, explosivité et rigueur à vos entraînements cardio et de frappe.", ar: "متنافس سابق على المستوى الوطني في التايكوندو، يضفي عمر الرشاقة والانفجارية والصرامة على تدريبات الكارديو والضربات." }
-  },
-  {
-    name: 'Amine Djebbar',
-    specialty: { fr: 'Vo Vietnam & CrossFit', ar: 'فو فيتنام وكروس فيت' },
-    exp: '6',
-    image: '',
-    bio: { fr: "Maître de Vo Vietnam spécialisé dans l'entraînement fonctionnel. Amine forge le corps et l'esprit à travers le mouvement, la force et la discipline traditionnelle.", ar: "ماستر في فو فيتنام متخصص في التدريب الوظيفي. يصقل أمين الجسم والعقل من خلال الحركة والقوة والانضباط التقليدي." }
-  },
+    bio: { 
+      fr: "Fondateur du Club Sifaks, avec plus de 35 ans d'expérience dans les arts martiaux et le fitness. Le Coach Sifaks a façonné des centaines de champions à travers ses quatre clubs à Kouba, Chéraga, Khraicia et Bab Ezzouar — alliant rigueur militaire et science moderne de l'entraînement pour des résultats exceptionnels.", 
+      ar: "مؤسس نادي سيفاكس، بأكثر من 35 سنة من الخبرة في الفنون القتالية واللياقة البدنية. الكوتش سيفاكس صنع مئات الأبطال عبر أنديته الأربعة في كوبا وشراقة وخرايسية وباب الزوار، جامعاً بين الصرامة العسكرية وعلم التدريب الحديث لتحقيق نتائج استثنائية." 
+    }
+  }
 ];
 
 // ── Galerie : uniquement les 3 vraies vidéos du club ──
@@ -541,6 +687,7 @@ export default function App() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState<string>('kouba');
+  const [selectedGender, setSelectedGender] = useState<'femmes' | 'hommes'>('femmes');
   const heroRef = useRef<HTMLDivElement>(null);
   const scheduleRef = useRef<HTMLDivElement>(null);
   const subscriptionsRef = useRef<HTMLDivElement>(null);
@@ -922,39 +1069,65 @@ export default function App() {
                       );
                     })()}
 
+                    {/* Gender selection */}
+                    <div className="flex gap-4 mb-8">
+                      <button
+                        onClick={() => setSelectedGender('femmes')}
+                        className={`flex-1 py-3 text-xs font-black uppercase tracking-widest transition-all duration-300 border ${
+                          selectedGender === 'femmes'
+                            ? 'bg-red-600 border-red-600 text-white shadow-[0_0_20px_rgba(220,38,38,0.3)]'
+                            : 'border-white/10 text-white/40 hover:border-white/30 hover:text-white'
+                        }`}
+                      >
+                        {lang === 'fr' ? 'Femmes' : 'النساء'}
+                      </button>
+                      <button
+                        onClick={() => setSelectedGender('hommes')}
+                        className={`flex-1 py-3 text-xs font-black uppercase tracking-widest transition-all duration-300 border ${
+                          selectedGender === 'hommes'
+                            ? 'bg-red-600 border-red-600 text-white shadow-[0_0_20px_rgba(220,38,38,0.3)]'
+                            : 'border-white/10 text-white/40 hover:border-white/30 hover:text-white'
+                        }`}
+                      >
+                        {lang === 'fr' ? 'Hommes' : 'الرجال'}
+                      </button>
+                    </div>
+
                     {/* Schedule table or empty state */}
-                    {SCHEDULE_BY_LOCATION[selectedLocation].length > 0 ? (
+                    {SCHEDULE_BY_LOCATION[selectedLocation][selectedGender].length > 0 ? (
                       <>
-                        <table className="w-full border-collapse">
-                          <thead>
-                            <tr className="border-b border-white/10">
-                              {[t.schedule.day, t.schedule.time, t.schedule.course, t.schedule.coach].map((h) => (
-                                <th key={h} className={`py-4 px-5 text-[10px] font-black tracking-[0.3em] uppercase text-red-500 ${isRtl ? 'text-right' : 'text-left'}`}>{h}</th>
+                        <div className="overflow-x-auto">
+                          <table className="w-full border-collapse min-w-[600px]">
+                            <thead>
+                              <tr className="border-b border-white/10">
+                                {[t.schedule.day, t.schedule.time, t.schedule.course, t.schedule.coach].map((h) => (
+                                  <th key={h} className={`py-4 px-5 text-[10px] font-black tracking-[0.3em] uppercase text-red-500 ${isRtl ? 'text-right' : 'text-left'}`}>{h}</th>
+                                ))}
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {SCHEDULE_BY_LOCATION[selectedLocation][selectedGender].map((item: any, i: number) => (
+                                <motion.tr
+                                  key={i}
+                                  initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}
+                                  className="border-b border-white/5 hover:bg-white/3 transition-colors group"
+                                >
+                                  <td className="py-5 px-5 font-bold text-white/80 whitespace-nowrap">{item.day[lang]}</td>
+                                  <td className="py-5 px-5 font-mono text-sm text-white/50 whitespace-nowrap">{item.time}</td>
+                                  <td className="py-5 px-5">
+                                    <div className="flex items-center gap-3">
+                                      <span className="font-bold text-sm md:text-base group-hover:text-red-400 transition-colors">{item.course[lang]}</span>
+                                      <span className={`text-[8px] md:text-[10px] font-black px-2 py-0.5 border uppercase tracking-wider ${typeColors[item.type]}`}>
+                                        {item.type === 'martial' ? (lang === 'fr' ? 'Fitness' : 'لياقة') : 'CrossFaks'}
+                                      </span>
+                                    </div>
+                                  </td>
+                                  <td className="py-5 px-5 text-white/40 text-xs md:text-sm italic whitespace-nowrap">{item.trainer}</td>
+                                </motion.tr>
                               ))}
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {SCHEDULE_BY_LOCATION[selectedLocation].map((item, i) => (
-                              <motion.tr
-                                key={i}
-                                initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}
-                                className="border-b border-white/5 hover:bg-white/3 transition-colors group"
-                              >
-                                <td className="py-5 px-5 font-bold text-white/80">{item.day[lang]}</td>
-                                <td className="py-5 px-5 font-mono text-sm text-white/50">{item.time}</td>
-                                <td className="py-5 px-5">
-                                  <div className="flex items-center gap-3">
-                                    <span className="font-bold text-lg group-hover:text-red-400 transition-colors">{item.course[lang]}</span>
-                                    <span className={`text-[10px] font-black px-2 py-0.5 border uppercase tracking-wider ${typeColors[item.type]}`}>
-                                      {item.type === 'martial' ? (lang === 'fr' ? 'Martial' : 'قتالي') : 'CrossFit'}
-                                    </span>
-                                  </div>
-                                </td>
-                                <td className="py-5 px-5 text-white/40 text-sm italic">{item.trainer}</td>
-                              </motion.tr>
-                            ))}
-                          </tbody>
-                        </table>
+                            </tbody>
+                          </table>
+                        </div>
                       </>
                     ) : (
                       <motion.div
@@ -965,17 +1138,17 @@ export default function App() {
                         <div className="font-display text-2xl uppercase text-white/20">
                           {lang === 'fr' ? 'Planning à venir' : 'الجدول قريباً'}
                         </div>
-                        <div className="text-white/20 text-sm max-w-xs">
+                        <div className="text-white/20 text-sm max-w-xs px-6">
                           {lang === 'fr'
-                            ? 'Les horaires de cette salle seront disponibles très prochainement.'
-                            : 'ستتوفر مواعيد هذه القاعة قريباً جداً.'}
+                            ? `Le planning ${selectedGender} pour cette salle sera disponible très prochainement.`
+                            : `جدول ${selectedGender === 'femmes' ? 'النساء' : 'الرجال'} لهذه القاعة سيكون متاحاً قريباً.`}
                         </div>
                       </motion.div>
                     )}
 
-                    <div className="mt-8 flex items-center gap-3 text-white/30 text-sm">
+                    <div className="mt-8 flex items-center gap-3 text-white/30 text-sm bg-white/5 p-4 border-l-2 border-red-600">
                       <Clock className="w-4 h-4 text-red-500" />
-                      {lang === 'fr' ? 'Toutes nos salles : Sam–Jeu 08h00–22h00' : 'جميع قاعاتنا: السبت–الخميس 08:00–22:00'}
+                      {lang === 'fr' ? 'Ouverture : Sam–Jeu 08h00–22h00' : 'الافتتاح: السبت–الخميس 08:00–22:00'}
                     </div>
                   </div>
                 )}
@@ -1150,33 +1323,51 @@ export default function App() {
 
                 {/* ── TRAINERS ── */}
                 {activeTab === 'trainers' && (
-                  <div ref={trainersRef} className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                  <div ref={trainersRef} className="flex justify-center">
                     {TRAINERS.map((trainer, i) => (
                       <motion.div
                         key={i}
-                        initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}
+                        initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }}
                         onClick={() => setSelectedTrainer(i)}
-                        className="group cursor-pointer"
+                        className="group cursor-pointer max-w-2xl w-full border border-white/10 p-8 md:p-12 bg-white/2 backdrop-blur-sm relative overflow-hidden"
                       >
-                        <div className="relative overflow-hidden mb-4 bg-black/40" style={{ aspectRatio: '3/4' }}>
-                          {trainer.image ? (
-                            <img src={trainer.image} alt={trainer.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" referrerPolicy="no-referrer" />
-                          ) : (
-                            <div className="w-full h-full flex flex-col items-center justify-center bg-white/5 group-hover:bg-red-500/5 transition-colors">
-                              <Users className="w-12 h-12 text-white/10 group-hover:text-red-500/20 transition-all duration-500" />
-                              <div className="mt-4 text-[8px] font-black uppercase tracking-[0.3em] text-white/10 group-hover:text-red-500/20">{lang === 'fr' ? 'Photo indisponible' : 'الصورة غير متوفرة'}</div>
-                            </div>
-                          )}
-                          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-                          <div className="absolute inset-0 border border-transparent group-hover:border-red-500/30 transition-colors" />
-                          <div className="absolute bottom-0 left-0 right-0 p-5">
-                            <div className="text-red-400 text-[10px] font-black uppercase tracking-widest mb-1">{trainer.specialty[lang]}</div>
-                            <div className="font-display text-2xl uppercase">{trainer.name}</div>
-                          </div>
+                        <div className="absolute top-0 right-0 p-8 opacity-[0.03] pointer-events-none select-none">
+                          <Award className="w-48 h-48 text-white" />
                         </div>
-                        <div className="flex items-center justify-between text-xs text-white/30 font-bold uppercase tracking-widest">
-                          <span>{trainer.exp} {lang === 'fr' ? "ans d'exp." : 'سنة خبرة'}</span>
-                          <span className="text-red-500 group-hover:underline">{t.trainers.clickHint}</span>
+
+                        <div className="relative flex flex-col md:flex-row gap-8 md:gap-12 items-center">
+                          <div className="w-full md:w-5/12 aspect-[3/4] overflow-hidden bg-black/40 ring-1 ring-white/10 group-hover:ring-red-500/50 transition-all duration-500">
+                            {trainer.image ? (
+                              <img src={trainer.image} alt={trainer.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000" referrerPolicy="no-referrer" />
+                            ) : (
+                              <div className="w-full h-full flex flex-col items-center justify-center bg-white/5">
+                                <Users className="w-16 h-16 text-white/5 group-hover:text-red-500/20 transition-all duration-500" />
+                              </div>
+                            )}
+                          </div>
+                          
+                          <div className="w-full md:w-7/12 flex flex-col justify-center">
+                            <div className="flex items-center gap-3 mb-6">
+                              <div className="h-px w-8 bg-red-500" />
+                              <span className="text-red-500 text-[10px] font-black tracking-[0.4em] uppercase">{trainer.specialty[lang]}</span>
+                            </div>
+                            
+                            <h3 className="font-display text-4xl md:text-6xl uppercase mb-6 leading-none">{trainer.name}</h3>
+                            <p className="text-white/40 text-sm md:text-base leading-relaxed mb-8 italic">"{trainer.bio[lang].split(' — ')[1]}"</p>
+                            
+                            <div className="flex items-center gap-10">
+                              <div>
+                                <div className="font-display text-5xl text-white leading-none">{trainer.exp}</div>
+                                <div className="text-[10px] text-red-500 uppercase tracking-widest font-black mt-2">
+                                  {lang === 'fr' ? "Ans d'expérience" : 'سنة خبرة'}
+                                </div>
+                              </div>
+                              <button className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-white/60 group-hover:text-red-500 transition-colors">
+                                {t.trainers.clickHint}
+                                <ArrowRight className={`w-3 h-3 group-hover:translate-x-1 transition-transform ${isRtl ? 'rotate-180' : ''}`} />
+                              </button>
+                            </div>
+                          </div>
                         </div>
                       </motion.div>
                     ))}
